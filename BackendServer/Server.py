@@ -75,6 +75,10 @@ def delete_dream(dream, user):
     conn.commit()
     return redirect(url_for("handle_profile", path=user))
 
+@app.route('/newprofile')
+def create_profile():
+    return
+
 #A catch all function :) goal-keeper
 @app.route('/<path:path>')
 def catch_all(path):

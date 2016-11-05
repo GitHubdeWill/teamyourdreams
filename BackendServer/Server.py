@@ -77,17 +77,20 @@ def delete_dream(dream, user):
 
 @app.route('/newprofile')
 def return_new():
-    render_template("newprofile.html")
+    return render_template("newprofile.html")
 
 @app.route('/newprofile', methods=['POST'])
 def create_profile():
     descrp = request.form['user']
+    smr = request.form['smr']
+    print(descrp)
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS dreams (dream text, user text)")
+    c.execute("INSERT INTO profiles VALUES (?, ?)", [descrp, smr,])
     c.execute("INSERT INTO dreams VALUES (?, ?)", ["complete all dreams", descrp,])
     conn.commit()
-    return redirect(url_for("return_new"))
+    return redirect(url_for("handle_profile", path=descrp))
 
 #A catch all function :) goal-keeper
 @app.route('/<path:path>')

@@ -6,7 +6,8 @@ from flask import Flask
 from flask import send_from_directory
 from flask import render_template
 from flask import request
-from flask import *
+from flask import redirect
+from flask import url_for
 DATABASE = './dream.db'
 app = Flask(__name__)
 

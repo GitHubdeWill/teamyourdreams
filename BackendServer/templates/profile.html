@@ -50,6 +50,7 @@
 	<h5 class="header col s12">Dream List</h5>
 	{% for item in dreamlist %}
         	<h5 class="header col s12">{{item[0]}}</h5>
+    <p><a href="delete_{{item[0]}}_{{name}}" class="btn-floating red"><i class="material-icons">delete</i></a></p>
     	{% endfor %}
       	</div>
         <br><br>

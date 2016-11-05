@@ -58,7 +58,7 @@ def handle_insert(path):
 
 def create_dream(dream, user):
     if len(dream)<1:
-        return redirect(url_for("handle_profile"))
+        return redirect(url_for("handle_profile"), path=user)
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS dreams (dream text, user text)")
@@ -66,6 +66,14 @@ def create_dream(dream, user):
     conn.commit()
     return redirect(url_for("handle_profile", path=user))
 
+@app.route('/delete_<dream>_<user>')
+def delete_dream(dream, user):
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
+    c.execute("CREATE TABLE IF NOT EXISTS dreams (dream text, user text)")
+    c.execute("DELETE FROM dreams WHERE dream=?", [dream,])
+    conn.commit()
+    return redirect(url_for("handle_profile", path=user))
 
 #A catch all function :) goal-keeper
 @app.route('/<path:path>')

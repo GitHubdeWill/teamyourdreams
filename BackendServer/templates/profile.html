@@ -46,8 +46,16 @@
         <h5 class="header col s12 light">{{summary}}</h5>
       </div>
         <br><br>
-	  <div class="row center">	
+	<div class="row center">	
 	  <image src="{{name}}.jpg"></image>
+	</div>
+	<div>
+	<div class='row'>
+		<form method='POST'>
+			<input type='text' name='dream'></input>
+			<input type='hidden' name='user' value='{{name}}'></input>
+			<input type='submit'/>		
+		</form>	
 	</div>
       </div>
     </div>

@@ -49,17 +49,16 @@ def handle_profile(path):
     smr = c.fetchone()[0]
     return render_template('profile.html', name=path, summary=smr)
     
-@app.route('/profile.html', methods=['POST'])
-def handle_insert():
+@app.route('/<path>_profile', methods=['POST'])
+def handle_insert(path):
     dr = request.form['dream']
-    ur = request.form['user']
-    return create_dream(dr,ur)
+    return create_dream(dr, path)
 
 def create_dream(dream, user):
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS dreams (dream text, user text)")
-    c.execute("INSERT INTO dreams VALUES (?, ?)", dream, user)
+    c.execute("INSERT INTO dreams VALUES (?, ?)", [dream, user,])
     conn.commit()
     return "Create Success"
 

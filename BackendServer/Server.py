@@ -47,7 +47,9 @@ def handle_profile(path):
     c.execute("CREATE TABLE IF NOT EXISTS profiles (name text, profile text)")
     c.execute("SELECT profile FROM profiles WHERE name=?", [path,])
     smr = c.fetchone()[0]
-    return render_template('profile.html', name=path, summary=smr)
+    c.execute("SELECT dream FROM dreams WHERE user=?", [path,])
+    lis = c.fetchall()
+    return render_template('profile.html', name=path, summary=smr, dreamlist=lis)
     
 @app.route('/<path>_profile', methods=['POST'])
 def handle_insert(path):
@@ -55,12 +57,14 @@ def handle_insert(path):
     return create_dream(dr, path)
 
 def create_dream(dream, user):
+    if len(dream)<1:
+        return redirect(url_for("handle_profile"))
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS dreams (dream text, user text)")
     c.execute("INSERT INTO dreams VALUES (?, ?)", [dream, user,])
     conn.commit()
-    return "Create Success"
+    return redirect(url_for("handle_profile", path=user))
 
 
 #A catch all function :) goal-keeper

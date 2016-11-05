@@ -6,8 +6,13 @@ from flask import Flask
 from flask import send_from_directory
 from flask import render_template
 from flask import request
+from flask import *
 DATABASE = './dream.db'
 app = Flask(__name__)
+
+@app.route('/')
+def go_home():
+    return redirect(url_for('handle_search'))
 
 #remember to replace form.html with actual path
 @app.route('/form.html', methods=['POST'])

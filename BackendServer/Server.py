@@ -12,7 +12,7 @@ from flask import Flask
 from flask import send_from_directory
 from flask import render_template
 from flask import request
-DATABASE = './dream.db'
+DATABASE = 'teamyourdreams/dream.db'
 app = Flask(__name__)
 
 #remember to replace form.html with actual path

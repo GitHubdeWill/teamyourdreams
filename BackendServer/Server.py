@@ -1,10 +1,4 @@
-
-
-'''
-Created on Nov 4, 2016
-
-@author: Kelvin Zhang
-'''
+#!/usr/bin/env python
 import os
 import sqlite3
 import re
@@ -12,7 +6,7 @@ from flask import Flask
 from flask import send_from_directory
 from flask import render_template
 from flask import request
-DATABASE = 'teamyourdreams/dream.db'
+DATABASE = './dream.db'
 app = Flask(__name__)
 
 #remember to replace form.html with actual path
@@ -71,5 +65,4 @@ def catch_all(path):
 
 if __name__ == '__main__':
     os.chdir('..')
-    app.debug = True
     app.run(host='0.0.0.0', port=80)

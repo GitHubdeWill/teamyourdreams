@@ -58,7 +58,7 @@ def handle_insert(path):
 
 def create_dream(dream, user):
     if len(dream)<1:
-        return redirect(url_for("handle_profile"), path=user)
+        return redirect(url_for("handle_profile", path=user))
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS dreams (dream text, user text)")
@@ -82,7 +82,11 @@ def return_new():
 @app.route('/newprofile', methods=['POST'])
 def create_profile():
     descrp = request.form['user']
+    if len(descrp) < 1:
+        return render_template("newprofile.html")
     smr = request.form['smr']
+    if len(smr) < 1:
+        return render_template("newprofile.html")
     print(descrp)
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
